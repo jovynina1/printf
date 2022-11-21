@@ -1,22 +1,17 @@
 #include "main.h"
 
 /**
- * print_char - prints a character to stdout
- * @args: variadic parameter
- *
- * Return: number of characters printed
+ * parse_char - returns the character
+ * @buff_dest: buffer
+ * @arg: list of arguments
+ * @buff_count: index of buffer pointer
+ * Return: buffer index
  */
-
-int print_char(va_list args)
+int parse_char(char *buff_dest, va_list arg, int buff_count)
 {
-	char c = (char)va_arg(args, int);
-	int count = 0;
+	char c = va_arg(arg, int);
 
-	if (c)
-	{
-		count = write(1, &c, 1);
-		return (count);
-	}
+	buff_dest[buff_count] = c;
 
-	return (0);
+	return (++buff_count);
 }
