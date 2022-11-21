@@ -45,7 +45,7 @@ int check_conversion(char formatter, char_funcs_t conversions[], char buffer[],
 				     int *buflenptr, int *bufposptr, va_list print_this)
 {
 	int j, chars;
-	
+
 	chars = 0;
 	for (j = 0; j < 13; j++)
 	{
@@ -115,21 +115,21 @@ int _printf(const char *format, ...)
 	char buffer[1024];
 	int chars, buflen, bufpos, *buflenptr, *bufposptr;
 	char_funcs_t conversions[] = {{"c", print_c},
-
-		
-		{"s", print_string},
-		{"%", print_percent},
-		{"d", print_integer},
-		{"i", print_integer},
-		{"b", print_binary},
-		{"r", print_reversed},
-		{"R", rot13},
-		{"u", unsigned_integer},
-		{"o", print_octal},
+		{"s", print_s},
+		{"i", print_int},
+		{"d", print_int},
+	        {"u", print_u},
+		{"o", print_o},
 		{"x", print_hex},
 		{"X", print_heX},
-		{NULL, NULL}
+		{"b", print_b},
+		{"S", print_S},
+		{"r", print_r},
+		{"R", print_R},
+		{"p", print_p},
 	};
+
+
 	initialize_buffer(buffer);
 	chars = bufpos = 0;
 	buflen = 1;
