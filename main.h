@@ -5,72 +5,36 @@
 #include <stdarg.h>
 
 /**
- * struct flags - struct containing flags to "turn on"
- * when a flag specifier is passed to _printf()
- * @plus: flag for the '+' character
- * @space: flag for the ' ' character
- * @hash: flag for the '#' character
+ * struct char_funcs - Struct to find function based on char
+ * @c: char to check as key
+ * @f: Pointer to function to call
 */
-typedef struct flags
+typedef struct char_funcs
 {
-		int plus;
-			int space;
-				int hash;
-} flags_t;
+		char *c;
+			int (*f)();
+} char_funcs_t;
 
-/**
- * struct printHandler - struct to choose the right function depending
- * on the format specifier passed to _printf()
- * @c: format specifier
- * @f: pointer to the correct printing function
-*/
-typedef struct printHandler
-{
-		char c;
-			int (*f)(va_list ap, flags_t *f);
-} ph;
-
-/* print_nums */
-int print_int(va_list l, flags_t *f);
-void print_number(int n);
-int print_unsigned(va_list l, flags_t *f);
-int count_digit(int i);
-
-/* print_bases */
-int print_hex(va_list l, flags_t *f);
-int print_hex_big(va_list l, flags_t *f);
-int print_binary(va_list l, flags_t *f);
-int print_octal(va_list l, flags_t *f);
-
-/* converter */
-char *convert(unsigned long int num, int base, int lowercase);
-
-/* _printf */
+void write_buffer(char buffer[], int *buflen, int *bufpos);
+void initialize_buffer(char buffer[]);
 int _printf(const char *format, ...);
-
-/* get_print */
-int (*get_print(char s))(va_list, flags_t *);
-
-/* get_flag */
-int get_flag(char s, flags_t *f);
-
-/* print_alpha */
-int print_string(va_list l, flags_t *f);
-int print_char(va_list l, flags_t *f);
-
-/* write_funcs */
-int _putchar(char c);
-int _puts(char *str);
-
-/* print_custom */
-int print_rot13(va_list l, flags_t *f);
-int print_rev(va_list l, flags_t *f);
-int print_bigS(va_list l, flags_t *f);
-
-/* print_address */
-int print_address(va_list l, flags_t *f);
-
-/* print_percent */
-int print_percent(va_list l, flags_t *f);
+int print_c(va_list args, char buffer[], int *buflen, int *bufpos);
+int print_s(va_list args, char buffer[], int *buflen, int *bufpos);
+int print_number(int n, char buffer[], int *buflen, int *bufpos);
+int print_int(va_list args, char buffer[], int *buflen, int *bufpos);
+char *binConverter(unsigned int n);
+char *octConverter(unsigned int n);
+char *hexConverter(char type, unsigned int n);
+char *size_tHex(char type, size_t n);
+int print_Unum(unsigned int n, char buffer[], int *buflen, int *bufpos);
+int print_u(va_list args, char buffer[], int *buflen, int *bufpos);
+int print_o(va_list args, char buffer[], int *buflen, int *bufpos);
+int print_hex(va_list args, char buffer[], int *buflen, int *bufpos);
+int print_heX(va_list args, char buffer[], int *buflen, int *bufpos);
+int print_b(va_list args, char buffer[], int *buflen, int *bufpos);
+int print_S(va_list args, char buffer[], int *buflen, int *bufpos);
+int print_r(va_list args, char buffer[], int *buflen, int *bufpos);
+int print_R(va_list args, char buffer[], int *buflen, int *bufpos);
+int print_p(va_list args, char buffer[], int *buflen, int *bufpos);
 
 #endif
