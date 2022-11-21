@@ -1,40 +1,29 @@
-#ifndef MAIN_H
-#define MAIN_H
+#ifndef _MAIN_H_
+#define _MAIN_H_
 
-#include <stdlib.h>
 #include <stdarg.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <unistd.h>
+
+int _printf(const char *format, ...);
+int (*check_specifier(const char*))(va_list);
 
 /**
- * struct char_funcs - Struct to find function based on char
- * @c: char to check as key
- * @f: Pointer to function to call
-*/
-typedef struct char_funcs
+ * struct func - struct for specifier to printer
+ * @t: character to compare
+ * @f: function to handle printing
+ */
+typedef struct func
 {
-		char *c;
-			int (*f)();
-} char_funcs_t;
+	char *t;
+	int (*f)(va_list);
+} func_t;
 
-void write_buffer(char buffer[], int *buflen, int *bufpos);
-void initialize_buffer(char buffer[]);
-int _printf(const char *format, ...);
-int print_c(va_list args, char buffer[], int *buflen, int *bufpos);
-int print_s(va_list args, char buffer[], int *buflen, int *bufpos);
-int print_number(int n, char buffer[], int *buflen, int *bufpos);
-int print_int(va_list args, char buffer[], int *buflen, int *bufpos);
-char *binConverter(unsigned int n);
-char *octConverter(unsigned int n);
-char *hexConverter(char type, unsigned int n);
-char *size_tHex(char type, size_t n);
-int print_Unum(unsigned int n, char buffer[], int *buflen, int *bufpos);
-int print_u(va_list args, char buffer[], int *buflen, int *bufpos);
-int print_o(va_list args, char buffer[], int *buflen, int *bufpos);
-int print_hex(va_list args, char buffer[], int *buflen, int *bufpos);
-int print_heX(va_list args, char buffer[], int *buflen, int *bufpos);
-int print_b(va_list args, char buffer[], int *buflen, int *bufpos);
-int print_S(va_list args, char buffer[], int *buflen, int *bufpos);
-int print_r(va_list args, char buffer[], int *buflen, int *bufpos);
-int print_R(va_list args, char buffer[], int *buflen, int *bufpos);
-int print_p(va_list args, char buffer[], int *buflen, int *bufpos);
+int print_char(va_list);
+int print_str(va_list);
+int print_cent(va_list);
+int print_int(va_list);
+int print_dec(va_list);
 
 #endif
